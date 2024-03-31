@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Difference Between Two Dates</title>
+    <style>
+        body{
+            background-color: burlywood;
+        }
+
+        .heading {
+            text-align: center;
+            margin:40px;
+            font-weight: bolder;
+        }
+
+        .container {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            padding-top: 90px;
+            height: 380px;
+            width: 460px;
+            background-image: url('background.png');
+            border-radius: 50px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, .3);
+        }
+
+        .content {
+            display: block;
+            margin: 10px auto;
+            padding-top: 40px;
+            width: 300px;
+            font-size: 20px;
+        }
+
+        input {
+            width: 100%;
+            height: 25px;
+            margin: 5px;
+            padding: 5px;
+            font-size: 20px;
+        }
+        .result{
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .btn-container{
+            display: flex;
+            justify-content: space-around; 
+            margin-top: 40px;    
+            margin-bottom: 30px;    
+        }
+
+        .btn {
+            background-color: rgb(110, 41, 41);
+            color: white;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="heading">Calculate Difference Between Two Dates </h1>
+    <div class="container">
+        <div class="content">
+            <label for="firstDate">First Date :</label>
+            <input type="date" id="firstDate">
+            <label for="secondDate">Second Date :</label>
+            <input type="date" id="secondDate"> 
+        </div>
+        <p class="result" id="dayCount"></p>
+        <div class="btn-container">
+            <button type="button" class="btn" onclick="calculateDifference()">Find Difference</button>
+            <button type="button" class="btn" onclick="reset()">Reset</button>
+        </div>              
+    </div>
+    <script>
+        function calculateDifference() {
+            const firstDate = document.getElementById('firstDate').value;
+            const secondDate = document.getElementById('secondDate').value;
+            const date1 = new Date(firstDate);
+            const date2 = new Date(secondDate);
+            const difference = Math.abs(date2 - date1);
+            const days = Math.round(difference / (1000 * 60 * 60 * 24));
+            const dayElement = document.getElementById('dayCount');
+            if(days<365){
+                dayElement.innerText = ` The Difference between the dates is ${days}  ${days > 1 ? 'days' :  'day'}.`;
+            }else{
+                dayElement.innerText = ` The Difference between the dates is ${parseInt(days/365)} years and ${days%365} days.`;
+            }
+        }
+        function reset()
+        {
+            document.getElementById('firstDate').value  ="";
+            document.getElementById('secondDate').value ="";
+            document.getElementById('dayCount').innerText = "";
+        }
+    </script>
+</body>
+</html>
